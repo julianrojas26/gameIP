@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/logo2.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <title>Log in</title>
+  </head>
+  <body>
+    <nav>
+      <li class="image">
+        <a href="/">
+          <img src="assets/logo.png" width="200" alt="" />
+        </a>
+      </li>
+      <div>
+        <li>
+          <a href="/"><%= dirs[0] %></a>
+        </li>
+        <li>
+          <a href="sign"><%= dirs[1] %></a>
+        </li>
+      </div>
+    </nav>
+    <script>
+      function a() {
+        event.preventDefault();
+        const user = "<%= data%>";
+        const object = user.replace(/&#34;/g, '"');
+        const datos = JSON.parse(object);
+        var nombre = document.getElementById("Nombre").value;
+        var contraseña = document.getElementById("Contraseña").value;
+        var valid = false;
+        if (nombre == "" && contraseña == "") {
+          mensaje = document.getElementById("message");
+          mensaje.innerHTML = "Insert Your User And Password";
+          mensaje.style.color = "red";
+        } else {
+          datos.forEach((u) => {
+            if (u.nombre == nombre && u.contraseña == contraseña) {
+              console.log(u);
+              valid = true;
+            }
+          });
+          if (valid) {
+            mensaje = document.getElementById("message");
+            mensaje.innerHTML = "You Are Log In Now";
+            mensaje.style.color = "green";
+            setTimeout(() => {
+              window.location.href = "/index";
+            }, 500);
+          } else {
+            mensaje = document.getElementById("message");
+            mensaje.innerHTML = "Incorrect User or Password";
+            mensaje.style.color = "red";
+          }
+        }
+      }
+    </script>
+    <p id="message"></p>
+    <form>
+      <label id="label_name" for="">Insert your user name:</label>
+      <input type="text" placeholder="User Name" id="Nombre" required />
+      <label for="">Insert your password:</label>
+      <input type="text" placeholder="Password" id="Contraseña" required />
+      <button id="guardar" onclick="a()">Log in</button>
+    </form>
+  </body>
+</html>
