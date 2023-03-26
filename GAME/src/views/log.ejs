@@ -33,6 +33,7 @@
         var nombre = document.getElementById("Nombre").value;
         var contraseña = document.getElementById("Contraseña").value;
         var valid = false;
+        document.getElementById("data").innerHTML = user
         if (nombre == "" && contraseña == "") {
           mensaje = document.getElementById("message");
           mensaje.innerHTML = "Insert Your User And Password";
@@ -67,5 +68,6 @@
       <input type="text" placeholder="Password" id="Contraseña" required />
       <button id="guardar" onclick="a()">Log in</button>
     </form>
+    <div id="data"></div>
   </body>
 </html>

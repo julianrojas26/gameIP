@@ -18,10 +18,10 @@
       <div>
         <li></li>
         <li>
-          <a href="/"><%= dirs[0] %></a>
+          <a href="sign"><%= dirs[0] %></a>
         </li>
         <li>
-          <a href="sign"><%= dirs[1] %></a>
+          <a href="/"><%= dirs[1] %></a>
         </li>
       </div>
     </nav>
@@ -32,18 +32,12 @@
         var pass = document.getElementById('pass').value
         var img = document.getElementById('img').value
         
-        fetch('http://localhost:3000/index',
-        {
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: {
-              nombre,
-              img: img.toString().substr(12),
-              pass
-            }
-        })
+        const user = {
+          nombre,
+          correo,
+          pass,
+          img
+        }
     }
     </script>
     <form action="/index" method="post" enctype="multipart/form-data">

@@ -3,6 +3,7 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import indexRoutes from "./routes/routes.js";
 import conexion from "../DB/conection.js";
+import { data } from "./data/data.js";
 import { fsync, readFileSync, writeFileSync } from "fs";
 
 
@@ -22,7 +23,7 @@ console.log("server is listening on port" + 3000);
 
 //DB
 
-function pedir() {
+export function pedir() {
   conexion.query(
     "select id, nombre, contraseña, correo from usuario",
     (err, res) => {
@@ -33,7 +34,7 @@ function pedir() {
       );
     }
   );
-  conexion.end();
+  return data;
 }
 
 export const insertar = (nombre, correo, pass, img) => {
@@ -48,3 +49,4 @@ export const insertar = (nombre, correo, pass, img) => {
     }
   );
 };
+

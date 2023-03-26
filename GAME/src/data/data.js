@@ -1,1 +1,1 @@
-export const data = [{"id":1,"nombre":"julian","contraseña":"12345","correo":"julirojastoque@gmail.com"},{"id":2,"nombre":"camilo","contraseña":"12312","correo":"camilo@gmail.com"},{"id":3,"nombre":"rogelio","contraseña":"123","correo":"rojelio@gmail.com"}]
+export const data = [{"id":1,"nombre":"a","contraseña":"v","correo":"c"},{"id":2,"nombre":"s","contraseña":"x","correo":"v"}]

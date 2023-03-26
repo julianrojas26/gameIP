@@ -1,49 +1,52 @@
 import { Router } from "express";
-import { data } from "../data/data.js";
-import multer, { diskStorage } from "multer";
-import mimeTypes from "mime-types";
+import multer from "multer";
 import { insertar } from "../index.js";
+import { pedir } from "../index.js";
 
 const router = Router();
-const nombre = ""
+const nombre = "";
 
 /// descargar imagen
 const storage = multer.diskStorage({
   destination: "src/uploads/",
   filename: (req, file, cb) => {
-    cb(
-      "",
-      file.originalname +
-        "." +
-        mimeTypes.extension(file.mimetype)
-    );
+    cb("", file.originalname);
   },
 });
 
 const upload = multer({
   storage: storage,
-
 });
 
-const file = upload.single("file")
+const file = upload.single("file");
 /// ruta index
-router.get("/index", (req, res) => {
+router
+  .get("/index", (req, res) => {
     res.render("index");
-  }).post("/index", file, (req, res) => {
-    const nombre = req.body;
-    console.log(nombre)
-    res.json({nombre});
-});
+  })
+  .post("/index", file, (req, res) => {
+    const nombre = req;
+    console.log(nombre.file.filename);
+    console.log(nombre.body);
+    insertar(
+      nombre.body.name,
+      nombre.body.email,
+      nombre.body.password,
+      nombre.file.filename
+    );
+    res.send("index");
+  });
 
 /// ruta log
-var string = JSON.stringify(data).toString();
-router.get("/", (req, res) =>
-  res.render("log", { dirs: ["Log In", "Sign In"], data: string })
-);
+router.get("/", (req, res) => {
+  const data = pedir();
+  const users = JSON.stringify(data).toString()
+  res.render("log", { dirs: ["Log In", "Sign In"], data: users});
+});
 
 /// ruta sign
-router.get("/sign", (req, res) =>
-  res.render("sign", { dirs: ["Home", "Log In"], nombre: nombre })
-);
+router.get("/sign", (req, res) => {
+  res.render("sign", { dirs: ["Sign In", "Log In"], nombre: nombre });
+});
 
 export default router;
